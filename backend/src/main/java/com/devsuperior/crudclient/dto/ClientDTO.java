@@ -1,6 +1,7 @@
 package com.devsuperior.crudclient.dto;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import com.devsuperior.crudclient.entities.Client;
 
@@ -11,17 +12,19 @@ public class ClientDTO implements Serializable {
 	private String name;
 	private String cpf;
 	private Double income;
+	private Instant birthDate;
 	private Integer children;
 	
 	public ClientDTO() {
 		
 	}
 
-	public ClientDTO(Long id, String name, String cpf, Double income, Integer children) {
+	public ClientDTO(Long id, String name, String cpf, Double income, Instant birthDate, Integer children) {
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
 		this.income = income;
+		this.birthDate = birthDate;
 		this.children = children;
 	}
 	
@@ -30,6 +33,7 @@ public class ClientDTO implements Serializable {
 		this.name = entity.getName();
 		this.cpf = entity.getCpf();
 		this.income = entity.getIncome();
+		this.birthDate = entity.getBirthDate();
 		this.children = entity.getChildren();
 	}
 
@@ -63,6 +67,14 @@ public class ClientDTO implements Serializable {
 
 	public void setIncome(Double income) {
 		this.income = income;
+	}
+
+	public Instant getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Instant birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public Integer getChildren() {
