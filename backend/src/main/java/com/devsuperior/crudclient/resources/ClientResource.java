@@ -22,7 +22,7 @@ import com.devsuperior.crudclient.dto.ClientDTO;
 import com.devsuperior.crudclient.services.ClientService;
 
 @RestController
-@RequestMapping(value = "/client")
+@RequestMapping(value = "/clients")
 public class ClientResource {
 	
 	@Autowired
