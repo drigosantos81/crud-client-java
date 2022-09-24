@@ -2,6 +2,8 @@ package com.devsuperior.crudclient.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,6 +43,18 @@ public class ClientService {
 		return new ClientDTO(entity);
 	}
 	
+	@Transactional
+	public ClientDTO update(Long id, ClientDTO dto) {
+		try {
+			Client entity = repository.getReferenceById(id);
+			copyDtoToEntity(dto, entity);
+			entity = repository.save(entity);
+			return new ClientDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
+	}
+	
 	private void copyDtoToEntity(ClientDTO dto, Client entity) {
 		
 		entity.setName(dto.getName());
@@ -48,7 +62,6 @@ public class ClientService {
 		entity.setIncome(dto.getIncome());
 		entity.setBirthDate(dto.getBirthDate());
 		entity.setChildren(dto.getChildren());
-
 	}
 	
 }
